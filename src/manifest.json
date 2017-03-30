@@ -1,0 +1,25 @@
+{
+    "name": "YouTrack Helper",
+    "version": "1.0",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": ["*://*/youtrack/dashboard*"],
+            "css": ["style.css"],
+            "js": ["jquery.min.js", "jquery.hotkeys.js", "moment.min.js", "main.js"]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "*://*/youtrack/dashboard*"
+    ],
+    "browser_action": {
+        "default_title": "YouTrack Helper",
+        "default_icon": "icon.png"
+    },
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }    
+}

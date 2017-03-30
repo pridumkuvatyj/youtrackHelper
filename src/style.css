@@ -1,0 +1,77 @@
+.helper_avatar {
+    display: inline-block;
+    width: 26px;
+    padding: 2px;
+    text-align: center;
+    line-height: 1.2em;
+    border-radius: 2px;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.38);
+}
+
+.helper_avatar.white_shadow {
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.38);
+}
+
+.helper_comments {
+    padding-left: 50px;
+    font-size: 12px;
+    max-height: 0;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.5s linear;
+}
+
+.helper_comments::after {
+    content: '';
+    display: block;
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.youtrack-issues__issue-info.active + .helper_comments {
+    max-height: 290px;
+}
+
+.helper_comment + .helper_comment {
+    margin-top: 15px;
+}
+
+.helper_comment_info {
+    color: #a0a0a0;
+}
+
+.comments-toggler-ico {
+  display: inline-block;
+  width: 15px;
+  height: 14px;
+  vertical-align: middle;
+  background: url('/youtrack/_classpath/smartui/img/default/youtrack-sprite.png') no-repeat 0 -364px;
+}
+
+.toggleCommentsAnchor {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 34px;
+  cursor: pointer;
+}
+
+.youtrack-issues__issue-info.active .comments-toggler-ico {
+  color: #ff5a00;
+  background-position: -16px -364px;
+}
+
+.youtrack-issues__issue-info {
+    padding-right: 40px;
+}
+
+.helper_comment_author {
+    color: #636363;
+    font-style: italic;
+}
