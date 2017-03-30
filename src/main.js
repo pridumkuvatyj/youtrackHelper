@@ -96,8 +96,10 @@ function printName(str) {
     return '<span class="helper_avatar ' + shadowClass + '" title="' + str + '" style="background: linear-gradient(135deg, ' + firstStrColor + ' 0%, ' + secondStrColor + ' 100%); color: ' + textColor + ';">' + initials + '</span>';
 }
 
-function modifyDashboard() {
-    $('.youtrack-issues__issue-id').each(function(index, el) {
+function modifyDashboard($parent) {
+    //if $parent not set - update all widgets
+    $parent = $parent || $(document);
+    $parent.find('.youtrack-issues__issue-id').each(function(index, el) {
         var issueId = this.text;
         $.ajax({
             url: '/youtrack/rest/issue/'+issueId,
@@ -106,7 +108,6 @@ function modifyDashboard() {
             context: this
         })
         .done(function(response) {
-            console.log("success");
             //get needed info
             var updatedAt = updaterName = lastCommentsText = '';
             $.each(response.field, function(i, issueField) {
@@ -161,4 +162,12 @@ function modifyDashboard() {
 
 $(document).bind('keydown', 'ctrl+z', function(){
     modifyDashboard();
+});
+
+$(document).on('click', '.widget__control', function(event){
+    event.preventDefault();
+    var $parent = $(this).closest('widget');
+    setTimeout(function(){
+        modifyDashboard($parent);
+    }, 1000);
 });
