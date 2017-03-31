@@ -160,7 +160,23 @@ function modifyDashboard($parent) {
     });
 }
 
-$(document).bind('keydown', 'ctrl+z', function(){
+function refreshButtonCreator () {
+   setTimeout(function () {
+      if ($('.dashboard-page__toolbar-buttons').length < 1) {
+         refreshButtonCreator();
+      }
+      else {
+        $('.dashboard-page__toolbar-buttons').prepend('<button class="ring-button ring-btn_blue helper_main_refresh_button"><span class="ring-button__content"><span>Refresh</span></span></button>');
+      }
+   }, 2000)
+}
+
+$(function() {
+    refreshButtonCreator();
+});
+
+$(document).on('click', '.helper_main_refresh_button', function(event){
+    event.preventDefault();
     modifyDashboard();
 });
 
@@ -171,3 +187,6 @@ $(document).on('click', '.widget__control', function(event){
         modifyDashboard($parent);
     }, 1000);
 });
+
+
+

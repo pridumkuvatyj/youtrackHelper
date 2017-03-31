@@ -6,7 +6,7 @@
         {
             "matches": ["*://*/youtrack/dashboard*"],
             "css": ["style.css"],
-            "js": ["jquery.min.js", "jquery.hotkeys.js", "moment.min.js", "main.js"]
+            "js": ["jquery.min.js", "moment.min.js", "main.js"]
         }
     ],
     "permissions": [
