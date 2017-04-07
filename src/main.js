@@ -54,6 +54,7 @@ function printDate(timestamp, colorize) {
 
     //replace long strings
     var replacementObj = {
+        'a few seconds': 'just now',
         ' seconds': 's',
         ' minutes': 'min',
         ' hours': 'h',
