@@ -88,3 +88,17 @@
 .ring-btn_blue {
     border-color: #0084C5!important;
 }
+
+.helper_state {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: transparent;
+    position: relative;
+    line-height: 1.2em;
+    margin: 0 5px;
+}

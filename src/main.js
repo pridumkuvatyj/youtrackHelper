@@ -111,14 +111,17 @@ function modifyDashboard($parent) {
         .done(function(response) {
             //get needed info
             var updatedAt = updaterName = lastCommentsText = '';
+            var stateField = {};
             $.each(response.field, function(i, issueField) {
                 if(issueField.name == 'updated')
                     updatedAt = issueField.value;
                 if(issueField.name == 'updaterFullName')
                     updaterName = issueField.value;
+                if(issueField.name == 'State')
+                    stateField = issueField;
 
                 //stop if we've found all we need
-                if(updatedAt && updaterName)
+                if(updatedAt && updaterName && Object.keys(stateField).length > 0)
                     return false;
             });
 
@@ -130,7 +133,23 @@ function modifyDashboard($parent) {
                 $issueContainer.prepend('<span class="last_updated"></span>');
                 $updatedContainer = $issueContainer.find('.last_updated');
             }
-            $updatedContainer.html(printDate(updatedAt, true) + ' ' + printName(updaterName));
+
+            $updatedContainer.html(printDate(updatedAt, true) + printName(updaterName));
+
+            //show state
+            var $stateBlock = $issueContainer.find('.helper_state');
+            if(!$stateBlock.length) {
+                var $stateBlock = $("<span>").attr({
+                    'class': "helper_state",
+                    'style': 'color: ' + stateField.color.fg + '; background-color: ' + stateField.color.bg + '',
+                    'title': stateField.value[0]
+                })
+                .text(stateField.value[0].substr(0,1))
+                .insertBefore($issueContainer.find('.helper_avatar '));
+            }
+            else {
+                $stateBlock.text(stateField.value[0].substr(0,1));
+            }
 
             //get last 2 comments
             if(response.comment.length) {
