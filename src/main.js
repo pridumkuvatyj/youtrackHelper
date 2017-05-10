@@ -200,12 +200,12 @@ $(document).on('click', '.helper_main_refresh_button', function(event){
     modifyDashboard();
 });
 
-$(document).on('click', '.widget__control', function(event){
+$(document).on('click', 'widget .widget__icon.ring-icon', function(event){
     event.preventDefault();
     var $parent = $(this).closest('widget');
     setTimeout(function(){
         modifyDashboard($parent);
-    }, 1000);
+    }, 2000);
 });
 
 
