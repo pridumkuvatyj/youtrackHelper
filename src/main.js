@@ -97,6 +97,23 @@ function printName(str) {
     return '<span class="helper_avatar ' + shadowClass + '" title="' + str + '" style="background: linear-gradient(135deg, ' + firstStrColor + ' 0%, ' + secondStrColor + ' 100%); color: ' + textColor + ';">' + initials + '</span>';
 }
 
+function printState(stateField) {
+    var value = stateField.value[0];
+
+    var replacementObj = {
+        'InProgress': 'P',
+        'ToVerify': 'V',
+        'ToFix': 'F'
+    };
+
+    for (var val in replacementObj)
+        value = value.replace(val, replacementObj[val]);
+
+    var stateName = value.substr(0,1);
+
+    return stateName;
+}
+
 function modifyDashboard($parent) {
     //if $parent not set - update all widgets
     $parent = $parent || $(document);
@@ -144,11 +161,11 @@ function modifyDashboard($parent) {
                     'style': 'color: ' + stateField.color.fg + '; background-color: ' + stateField.color.bg + '',
                     'title': stateField.value[0]
                 })
-                .text(stateField.value[0].substr(0,1))
+                .text(printState(stateField))
                 .insertBefore($issueContainer.find('.helper_avatar '));
             }
             else {
-                $stateBlock.text(stateField.value[0].substr(0,1));
+                $stateBlock.text(printState(stateField));
             }
 
             //get last 2 comments
@@ -202,8 +219,9 @@ $(document).on('click', '.helper_main_refresh_button', function(event){
 
 $(document).on('click', 'widget .widget__icon.ring-icon[glyph="#refresh"]', function(event){
     event.preventDefault();
+
     var $parent = $(this).closest('widget');
     setTimeout(function(){
         modifyDashboard($parent);
-    }, 2000);
+    }, 1000);
 });
